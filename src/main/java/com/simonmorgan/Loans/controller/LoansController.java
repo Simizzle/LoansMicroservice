@@ -21,8 +21,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(
-        name = "CRUD REST APIs for Loans in EazyBank",
-        description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE loan details"
+        name = "CRUD REST APIs for Loans in Banking Application",
+        description = "CRUD REST APIs in Banking Application to CREATE, UPDATE, FETCH AND DELETE loan details"
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
