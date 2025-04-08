@@ -2,6 +2,7 @@ package com.simonmorgan.Loans.controller;
 
 import com.simonmorgan.Loans.constants.LoansConstants;
 import com.simonmorgan.Loans.dto.ErrorResponseDto;
+import com.simonmorgan.Loans.dto.LoansContactInfoDto;
 import com.simonmorgan.Loans.dto.LoansDto;
 import com.simonmorgan.Loans.dto.ResponseDto;
 import com.simonmorgan.Loans.service.ILoansService;
@@ -42,6 +43,9 @@ public class LoansController {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    LoansContactInfoDto loansContactInfoDto;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -216,5 +220,29 @@ public class LoansController {
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get contact info",
+            description = "Contact info details that can be reached in case of any issues"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @
+                            Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(loansContactInfoDto);
     }
 }
